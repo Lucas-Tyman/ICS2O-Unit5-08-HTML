@@ -1,19 +1,55 @@
 // Created by: Lucas Tyman
-// Created on: Apr 2022
+// Created on: May 2022
 // This file contains the JS functions for index.html
+
+'use strict'
 
 /**
  * Check service worker.
  */
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register("/ICS2O-PWA-Template/sw.js", {
-    scope: "/ICS2O-PWA-Template/",
+  navigator.serviceWorker.register("/ICS2O-Unit5-08-HTML/sw.js", {
+    scope: "/ICS2O-Unit5-08-HTML/",
   })
 }
 
 /**
  * This function displays an alert.
  */
-function myButtonClicked() {
-  document.getElementById("hello-world").innerHTML = "<p>Hello, World!</p>"
+function calculate() {
+  // input
+  var firstInteger = document.getElementById("first-integer").value
+  var secondInteger = document.getElementById("second-integer").value
+
+  // process
+  var answer = 0
+  var firstIntegerAsInt = parseInt(firstInteger)
+  var secondIntegerAsInt = parseInt(secondInteger)
+  var numberCountingDown = firstIntegerAsInt
+
+
+  if ((firstIntegerAsInt > 0) && (secondIntegerAsInt > 0)) {
+    while (numberCountingDown >= secondIntegerAsInt) {
+      numberCountingDown = numberCountingDown - secondIntegerAsInt
+      answer++
+    }
+  } else if ((firstIntegerAsInt < 0) && (secondIntegerAsInt < 0)) {
+    numberCountingDown = Math.abs(numberCountingDown)
+    secondIntegerAsInt = Math.abs(secondIntegerAsInt)
+    while (numberCountingDown >= secondIntegerAsInt) {
+      numberCountingDown = numberCountingDown - secondIntegerAsInt
+      answer++
+    }
+  } else {
+    numberCountingDown = Math.abs(numberCountingDown)
+    secondIntegerAsInt = Math.abs(secondIntegerAsInt)
+    while (numberCountingDown >= secondIntegerAsInt) {
+      numberCountingDown = numberCountingDown - secondIntegerAsInt
+      answer++
+    }
+    answer = -Math.abs(answer)
+  }
+
+  // output
+  document.getElementById("answer").innerHTML = firstInteger + " ÷ " + secondInteger + " = " + answer + " R " + numberCountingDown
 }
